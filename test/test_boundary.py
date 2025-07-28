@@ -1,7 +1,7 @@
 import unittest
 from test.TestUtils import TestUtils
-class ExceptionalTest(unittest.TestCase):
-    def test_exceptional(self):
+class BoundaryTest(unittest.TestCase):
+    def test_boundary(self):
         test_obj = TestUtils()
-        test_obj.yakshaAssert("TestExceptional",True,"exceptional")
-        print("TestExceptional = Passed")
+        test_obj.yakshaAssert("TestBoundary",True,"boundary")
+        print("TestBoundary = Passed")
