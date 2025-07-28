@@ -1,6 +1,6 @@
 import unittest
 from test.TestUtils import TestUtils
-from nutrition_calculation_system import *
+from skeleton import *
 
 class TestNutritionCalculator(unittest.TestCase):
 
