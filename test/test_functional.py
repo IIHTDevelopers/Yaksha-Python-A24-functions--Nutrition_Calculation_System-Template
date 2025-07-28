@@ -1,21 +1,15 @@
-"""
-Functional tests for the Nutrition Calculator System - Unittest Version.
-"""
-
 import unittest
-import os
-import sys
-import importlib
 from test.TestUtils import TestUtils
-from skeleton import *
+from nutrition_calculation_system import *
 
-class TestNutritionCalculator:
-    def __init__(self, test_obj):
-        self.test_obj = test_obj
+class TestNutritionCalculator(unittest.TestCase):
+
+    def setUp(self):
+        self.test_obj = TestUtils()
 
     def test_calculate_bmi_expected(self):
         try:
-            result = calculate_bmi(70, 1.75)  # → 22.86
+            result = calculate_bmi(70, 1.75)
             expected = 22.86
             self.test_obj.yakshaAssert("TestCalculateBmiExpected", result == expected, "functional")
             print("TestCalculateBmiExpected =", "Passed" if result == expected else "Failed")
@@ -26,7 +20,7 @@ class TestNutritionCalculator:
     def test_get_bmi_category_expected(self):
         try:
             bmi = 22.86
-            result = get_bmi_category(bmi)  # → "Normal weight"
+            result = get_bmi_category(bmi)
             expected = "Normal weight"
             self.test_obj.yakshaAssert("TestGetBmiCategoryExpected", result == expected, "functional")
             print("TestGetBmiCategoryExpected =", "Passed" if result == expected else "Failed")
@@ -99,8 +93,8 @@ class TestNutritionCalculator:
             calories = 2650
             protein = 112.0
             carbs = (calories * 0.5) / 4     # 331.25
-            fat = (calories * 0.25) / 9      # 73.61
-            result = format_nutrition_result(calories, protein, carbs, round(fat, 2))
+            fat = round((calories * 0.25) / 9, 2)  # 73.61
+            result = format_nutrition_result(calories, protein, carbs, fat)
             expected = (
                 "Nutrition Summary:\n"
                 "- Calories: 2650 kcal\n"
@@ -115,11 +109,5 @@ class TestNutritionCalculator:
             print("TestFormatNutritionSummaryExpected = Failed | Exception:", e)
 
 
-# Add a main block to run all functional tests
 if __name__ == "__main__":
-    test_obj = TestUtils()
-    tester = TestNutritionCalculator(test_obj)
-    # List all callable test methods
-    test_methods = [method for method in dir(tester) if method.startswith("test_") and callable(getattr(tester, method))]
-    for method in test_methods:
-        getattr(tester, method)()
+    unittest.main()
